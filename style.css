@@ -56,7 +56,7 @@ body{
 
 .post-dummy{
     height: 70px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-align: center;
     color: silver;
     padding-top:50px;
@@ -107,3 +107,13 @@ body{
   .container{
       padding-top: 60px;
   }
+
+  .post_loading_text {
+    text-align: center;
+    padding: 20px;
+    color: silver;
+    font-size: 30rpx;
+    padding-bottom: 40px;
+    margin-top:30px;    
+}
+    

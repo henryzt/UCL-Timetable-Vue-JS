@@ -58,21 +58,24 @@
   })
 
 
+  let xhttp = null;
 
-function requestTimetable(date){
-    app.timetable = null
+  function requestTimetable(date){
+      app.timetable = null
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          // Typical action to be performed when the document is ready:
-          app.timetable = JSON.parse(xhttp.responseText);
-          console.log(app.timetable)
+      if(xhttp) xhttp.abort();
+      
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            // Typical action to be performed when the document is ready:
+            app.timetable = JSON.parse(xhttp.responseText);
+            console.log(app.timetable)
 
-        }
-    };
-    xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=21472135352675&date=${date}`, true);
-    xhttp.send();
-}
+          }
+      };
+      xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=21472135352675&date=${date}`, true);
+      xhttp.send();
+  }
 
 requestTimetable(todayDateConst)
