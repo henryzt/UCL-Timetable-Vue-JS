@@ -52,4 +52,35 @@
 body{
     background: #f7f7f7;
 }
-    
+
+
+.post-dummy{
+    height: 70px;
+    margin-bottom: 50px;
+    margin-top:0;
+    text-align: center;
+    color: silver;
+    padding-top:50px;
+}
+
+
+.loading-animation{
+    background: linear-gradient(135deg,
+     rgba(238,238,238,0) 0%,
+     rgba(238,238,238,0) 33%,
+     rgb(255, 255, 255) 53%,
+     rgba(238,238,238,0) 59%,
+     rgba(238,238,238,0) 100%
+     );
+    background-size: 200% 100%;
+    animation: loading 2s ease infinite;
+}
+
+@keyframes loading{
+    0% {
+		background-position: 120% 0%
+	}
+	100% {
+		background-position: -50% 0%
+	}
+}

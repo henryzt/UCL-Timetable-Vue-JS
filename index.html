@@ -15,10 +15,17 @@
     <div class="container">
         <div id="app">
 
+            <!-- loading indicator dummy -->
+            <div v-for="n in 5" v-if="!timetable">
+                <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                <div class="post post-dummy loading-animation">
+                </div>
+            </div>
+
             <div v-for="item in timetable">
                 <!-- date indicator -->
                 <div id="{{item.today? 'today' : '0'}}">
-                    <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v:if="{{item.today}}">Today</div>
+                    <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v-if="item.today">Today</div>
                     </div>
                 </div>
                 <!-- sessions -->
