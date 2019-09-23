@@ -84,6 +84,14 @@
 
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
+          //ga report
+          gtag('event', 'request-timetable', {
+            'event_category': 'request',
+            'event_label': 'timetable',
+            'value': `id=${ifanrId}&date=${date}`
+          });
+
+
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             app.timetable = JSON.parse(xhttp.responseText);
