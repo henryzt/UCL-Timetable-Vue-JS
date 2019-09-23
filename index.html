@@ -14,9 +14,20 @@
 <body>
     <div class="container">
         <div id="app">
-            <div v-for="session in today.sessions">
-                <session :session="session"></session>
+
+            <div v-for="item in timetable">
+                <!-- date indicator -->
+                <div id="{{item.today? 'today' : '0'}}">
+                    <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v:if="{{item.today}}">Today</div>
+                    </div>
+                </div>
+                <!-- sessions -->
+                <div v-for="session in item.sessions">
+                    <session :session="session"></session>
+                </div>
             </div>
+
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
