@@ -86,8 +86,8 @@
       xhttp.onreadystatechange = function() {
           //ga report
           gtag('event', 'request-timetable', {
-            'event_category': 'request',
-            'event_label': 'timetable',
+            'event_category': 'timetable',
+            'event_label': date,
             'value': `id=${ifanrId}&date=${date}`
           });
 
