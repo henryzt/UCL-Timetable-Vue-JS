@@ -1,0 +1,8 @@
+.time-block{
+    background: orange;
+    color: white;
+    max-width: 20em;
+    padding: 2em;
+    width: 100%;
+    border-radius:5px;
+}
