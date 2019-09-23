@@ -2,11 +2,31 @@
     data: () => ({ count: 10 }),
     props: ['session'],
     template: `
-      <div class="time-block">
-        <div class="block-title">{{ session.module.name }}</div>
-        <div class="block-location">{{ session.location.name }}</div>
+      <div class="post" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
+      <div style="width:20%;text-align:center; color:#f48641">
+        <div>{{session.start_time}}</div>
+        <div>{{session.end_time}}</div>
       </div>
-    `
+      
+      <div style='width:80%;'>
+        <div class="name">
+          {{session.session_title}}  
+
+        </div> 
+
+        <div class="post_title">
+            {{session.location.name}} - {{session.location.site_name}}
+        </div>
+        <div class="post_title">
+            {{session.module.lecturer.name}}    
+        </div>
+
+        <div>
+          <text class="additional-info">{{" "+session.session_type_str}}</text>
+        </div>
+
+        </div>
+      </div>  `
   })
 
   var app = new Vue({

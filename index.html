@@ -12,9 +12,11 @@
     
 </head>
 <body>
-    <div id="app">
-        <div v-for="session in today.sessions">
-            <session :session="session"></session>
+    <div class="container">
+        <div id="app">
+            <div v-for="session in today.sessions">
+                <session :session="session"></session>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
