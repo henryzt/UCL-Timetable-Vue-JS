@@ -12,16 +12,26 @@
     
 </head>
 <body>
-    <div class="container">
-        <div id="app">
+    <div id="app">
+        <div class="container">
+
+            <div class="float">
+                <div class="navigator">
+                    <div @click="seekPreviousWeek">上一周</div>
+                    <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? "今日" : date}}</div>
+                    <div @click="seekNextWeek">下一周</div>
+                </div>
+                <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!timetable"></div>
+            </div>
+
 
             <!-- loading indicator dummy -->
             <div v-for="n in 5" v-if="!timetable">
-                <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                 <div class="post post-dummy loading-animation">
                 </div>
             </div>
 
+            <!-- list rendering for each date -->
             <div v-for="item in timetable">
                 <!-- date indicator -->
                 <div id="{{item.today? 'today' : '0'}}">
@@ -37,6 +47,7 @@
 
         </div>
     </div>
+    <script src="moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="script.js"></script>
 </body>

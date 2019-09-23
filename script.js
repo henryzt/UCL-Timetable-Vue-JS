@@ -1,3 +1,6 @@
+  const dateFormat = 'YYYY-MM-DD';
+  const todayDateConst = moment().format(dateFormat);
+
   Vue.component('session', {
     data: () => ({ count: 10 }),
     props: ['session'],
@@ -32,21 +35,44 @@
   var app = new Vue({
     el: '#app',
     data: {
-      timetable: null
+      timetable: null,
+      date: todayDateConst,
+      todayDate: todayDateConst
+    },
+    methods: {
+      seekNextWeek: function(){
+        this.date = moment(this.date).add(7, 'days').format(dateFormat)
+        requestTimetable(this.date)
+      },
+  
+      seekPreviousWeek: function(){
+        this.date = moment(this.date).subtract(7, 'days').format(dateFormat)
+        requestTimetable(this.date)
+      },
+  
+      returnToday: function () {
+        this.date = this.todayDate
+        requestTimetable(this.date)
       }
+    }
   })
 
 
 
+function requestTimetable(date){
+    app.timetable = null
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-         // Typical action to be performed when the document is ready:
-         app.timetable = JSON.parse(xhttp.responseText);
-         console.log(app.timetable)
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Typical action to be performed when the document is ready:
+          app.timetable = JSON.parse(xhttp.responseText);
+          console.log(app.timetable)
 
-      }
-  };
-  xhttp.open("GET", "https://uclcssa.cn/post/get-timetable.php?id=21472135352675&date=2019-10-01", true);
-  xhttp.send();
+        }
+    };
+    xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=21472135352675&date=${date}`, true);
+    xhttp.send();
+}
+
+requestTimetable(todayDateConst)

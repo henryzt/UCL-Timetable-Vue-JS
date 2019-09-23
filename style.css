@@ -57,7 +57,6 @@ body{
 .post-dummy{
     height: 70px;
     margin-bottom: 50px;
-    margin-top:0;
     text-align: center;
     color: silver;
     padding-top:50px;
@@ -84,3 +83,27 @@ body{
 		background-position: -50% 0%
 	}
 }
+
+
+
+.navigator{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 30px;
+    font-size: 14px;
+    color: grey;
+    background: white;
+    box-shadow: -1px 2px 6px -1px rgba(0,0,0,0.1);
+
+  }
+
+  .float{
+      position: fixed;
+      width: 100%;
+      top:0;
+      left:0;
+  }
+
+  .container{
+      padding-top: 60px;
+  }
