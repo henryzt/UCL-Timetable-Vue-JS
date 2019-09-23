@@ -58,13 +58,30 @@
   })
 
 
+
+  //ref https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+  function findGetParameter(parameterName) {
+      var result = null,
+          tmp = [];
+      location.search
+          .substr(1)
+          .split("&")
+          .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+          });
+      return result;
+  }
+
+  let ifanrId = findGetParameter("id")
+
   let xhttp = null;
 
   function requestTimetable(date){
       app.timetable = null
 
       if(xhttp) xhttp.abort();
-      
+
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -74,8 +91,7 @@
 
           }
       };
-      xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=21472135352675&date=${date}`, true);
+      xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=${ifanrId}&date=${date}`, true);
       xhttp.send();
   }
-
 requestTimetable(todayDateConst)
