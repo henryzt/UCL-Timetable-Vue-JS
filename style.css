@@ -106,6 +106,8 @@ body{
 
   .container{
       padding-top: 60px;
+      max-width: 500px;
+      margin: auto;
   }
 
   .post_loading_text {
@@ -124,15 +126,16 @@ body{
 /* ref: https://www.w3schools.com/howto/howto_js_sidenav.asp */
 .sidepannel {
     height: 100%;
-    width: 0;
+    width: 100%;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 100%;
     right: 0;
     background-color: white;
     overflow-x: hidden;
     transition: 0.5s;
     box-shadow: 2px 0px 20px -10px rgba(0,0,0,0.5);
+    border-radius: 10px;
   }
   
   .sidepannel_content{
@@ -147,16 +150,15 @@ body{
   }
   
   .sidepannel .closebtn {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
     color: #333333;
     display: block;
     transition: 0.3s;
     position: fixed;
-    top: 100px;
-    right: 40px;
+    top: 13%;
+    right: 5%;
     font-size: 36px;
-    margin-left: 50px;
     z-index: 500;
   }

@@ -58,31 +58,20 @@
   })
 
 
-  function openSidePanel(panelName) {
-      // document.getElementById("closebtn").setAttribute("class","closebtn");
-      resizeSidePanel()
+  var sidePanelOpen;
+
+  function openSidePanel() {
+    sidePanelOpen = true;
+    document.getElementById("sidepannel").style.top = "10%";
+    document.getElementById("closebtn").setAttribute("class","closebtn");
   }
   
   function closeSidePanel() {
-      document.getElementById("sidepannel").style.width = 0;
-      document.getElementById("main").style.marginRight= 0;
+      sidePanelOpen = false;
+      document.getElementById("sidepannel").style.top = "100%";
       document.getElementById("closebtn").setAttribute("class","hidden");
   }
   
-  function resizeSidePanel(){
-      document.getElementById("main").style.marginRight= 0;
-      let pannel = document.getElementById("sidepannel")
-      if(window.innerWidth < 1100){
-          pannel.style.width = "60%";
-          if(window.innerWidth < 900){
-              pannel.style.width = "100%";
-          }
-      }else{
-          pannel.style.width = "40%";
-          document.getElementById("main").style.marginRight = pannel.style.width;
-      }
-  }
-  window.addEventListener("resize", resizeSidePanel);
   
 
 
