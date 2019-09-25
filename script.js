@@ -63,12 +63,16 @@
   function openSidePanel() {
     sidePanelOpen = true;
     document.getElementById("sidepannel").style.top = "10%";
+    document.getElementById("spcover").style.opacity=0.5;
+    document.getElementById("spcover").style.visibility="visible";
     document.getElementById("closebtn").setAttribute("class","closebtn");
   }
   
   function closeSidePanel() {
       sidePanelOpen = false;
       document.getElementById("sidepannel").style.top = "100%";
+      document.getElementById("spcover").style.opacity=0;
+      document.getElementById("spcover").style.visibility="gone";
       document.getElementById("closebtn").setAttribute("class","hidden");
   }
   
