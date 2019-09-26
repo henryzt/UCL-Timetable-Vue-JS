@@ -5,7 +5,7 @@
     data: () => ({ count: 10 }),
     props: ['session'],
     template: `
-      <div class="post" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
+      <div class="post"  @click="openSidePanel(session)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
       <div style="width:20%;text-align:center; color:#f48641">
         <div>{{session.start_time}}</div>
         <div>{{session.end_time}}</div>
@@ -37,7 +37,8 @@
     data: {
       timetable: null,
       date: todayDateConst,
-      todayDate: todayDateConst
+      todayDate: todayDateConst,
+      current: null
     },
     methods: {
       seekNextWeek: function(){
@@ -60,20 +61,21 @@
 
   var sidePanelOpen;
 
-  function openSidePanel() {
+  function openSidePanel(session) {
+    app.current = session
     sidePanelOpen = true;
     document.getElementById("sidepannel").style.top = "10%";
     document.getElementById("spcover").style.opacity=0.5;
     document.getElementById("spcover").style.visibility="visible";
-    document.getElementById("closebtn").setAttribute("class","closebtn");
+    document.getElementById("closebtn").style.top = "12%";
   }
   
   function closeSidePanel() {
       sidePanelOpen = false;
       document.getElementById("sidepannel").style.top = "100%";
       document.getElementById("spcover").style.opacity=0;
-      document.getElementById("spcover").style.visibility="gone";
-      document.getElementById("closebtn").setAttribute("class","hidden");
+      document.getElementById("spcover").style.visibility="hidden";
+      document.getElementById("closebtn").style.top = "-5%";
   }
   
   

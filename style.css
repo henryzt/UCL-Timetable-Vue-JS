@@ -159,18 +159,41 @@ body{
       transition: 0.5s;
       z-index: 1;
       position: fixed;
+      visibility: hidden;
   }
   
   .sidepannel .closebtn {
     padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
-    color: #333333;
+    color: grey;
     display: block;
-    transition: 0.3s;
+    transition: 0.5s;
     position: fixed;
-    top: 13%;
-    right: 5%;
+    /* top: 12%; */
+    top: -5%;
+    left: 45%;
     font-size: 36px;
     z-index: 500;
+  }
+
+
+
+
+
+  .details{
+      padding: 20px;
+  }
+
+  .detail_title{
+    font-size: 20px;
+    padding-bottom: 3px;
+    color: #545454;
+    padding-top: 50px;
+    display: block;
+  }
+
+  .detail_info{
+      font-size: 14px;
+      display: flex;
   }
