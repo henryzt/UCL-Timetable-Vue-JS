@@ -79,6 +79,21 @@
   }
   
   
+  function getMondayOfDate(dateString){
+    return moment(dateString).startOf('week').add(1,'day').format(dateFormat);
+  }
+
+
+  function getFromLocalStorage(dateString){
+    console.log(localStorage.getItem("last_updated"))
+    return JSON.parse(localStorage.getItem(getMondayOfDate(dateString)))
+  }
+
+  function setToLocalStorage(dateString, sessions){
+    localStorage.setItem("last_updated", moment().toISOString())
+    return localStorage.setItem(getMondayOfDate(dateString), sessions)
+  }
+
 
 
 
@@ -103,6 +118,12 @@
   function requestTimetable(date){
       app.timetable = null
 
+      //find if there are a local stored version
+      let cached = getFromLocalStorage(date);
+      if (cached) {
+        app.timetable = cached;
+      }
+
       if(xhttp) xhttp.abort();
 
       xhttp = new XMLHttpRequest();
@@ -118,6 +139,7 @@
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             app.timetable = JSON.parse(xhttp.responseText);
+            setToLocalStorage(date, xhttp.responseText)
             console.log(app.timetable)
 
           }
