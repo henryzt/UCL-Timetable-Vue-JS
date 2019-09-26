@@ -38,6 +38,7 @@
       timetable: null,
       date: todayDateConst,
       todayDate: todayDateConst,
+      loaded: false,
       current: null
     },
     methods: {
@@ -90,6 +91,7 @@
   }
 
   function setToLocalStorage(dateString, sessions){
+    console.log(`stored `+dateString)
     localStorage.setItem("last_updated", moment().toISOString())
     return localStorage.setItem(getMondayOfDate(dateString), sessions)
   }
@@ -112,11 +114,11 @@
   }
 
   let ifanrId = findGetParameter("id")
-
   let xhttp = null;
 
   function requestTimetable(date){
       app.timetable = null
+      app.loaded = false
 
       //find if there are a local stored version
       let cached = getFromLocalStorage(date);
@@ -139,6 +141,7 @@
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             app.timetable = JSON.parse(xhttp.responseText);
+            app.loaded = true;
             setToLocalStorage(date, xhttp.responseText)
             console.log(app.timetable)
 

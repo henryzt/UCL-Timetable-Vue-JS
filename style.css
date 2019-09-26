@@ -196,4 +196,16 @@ body{
   .detail_info{
       font-size: 14px;
       display: flex;
+      flex-direction: row;
+      margin: 7% 2%;
+  }
+
+  .detail_icon{
+      width: 10%;
+      color: #f48641;
+  }
+
+  .detail_text{
+      width: 90%;
+      opacity: 0.9;
   }

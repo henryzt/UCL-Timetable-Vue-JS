@@ -24,16 +24,45 @@
 </head>
 <body>
     <div id="app">
-        <div class="sidepannel_cover" id="spcover"></div>
+        <div class="sidepannel_cover" @click="closeSidePanel" id="spcover"></div>
         <div id="sidepannel" class="sidepannel">
-            <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeSidePanel()">
+            <a href="javascript:void(0)" id="closebtn" class="closebtn" @click="closeSidePanel">
                 <i class="material-icons">expand_more</i>
             </a>
 
             <div class="details" v-if="current">
-                <div class="detail_title">{{current.session_title}}</div>
-                <div style="padding-top: 10px; opacity: 0.6;">{{todayDate}} · {{current.start_time}} - {{current.end_time}}</div>
-                <div class="detail_info"><i class="material-icons md-24">room</i>Location</div>
+                <div style="padding-left: 12%;">
+                    <div class="detail_title">{{current.session_title}}</div>
+                    <div style="padding: 10px 0; opacity: 0.6;">{{todayDate}} · {{current.start_time}} - {{current.end_time}}</div>
+                </div>
+
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">subject</i></div>
+                    <div class="detail_text">{{current.module.module_id}} - {{current.module.name}}</div>
+                </div>
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">info</i></div>
+                    <div class="detail_text">{{current.session_type_str}}</div>
+                </div>
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">room</i></div>
+                    <div class="detail_text">{{current.location.name}} - {{current.location.site_name}}</div>
+                </div>
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">assignment_ind</i></div>
+                    <div class="detail_text">{{current.contact}}</div>
+                </div>
+
+                <hr style="opacity: 0.3; margin: 30px 0;">
+
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">people</i></div>
+                    <div class="detail_text">Room capacity - {{current.location.capacity}}</div>
+                </div>
+                <div class="detail_info">
+                    <div class="detail_icon"><i class="material-icons md-24">email</i></div>
+                    <div class="detail_text">Lecturer Email - {{current.module.lecturer.email}}</div>
+                </div>
             </div>
         </div>
 
@@ -45,7 +74,8 @@
                     <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? "今日" : date}}</div>
                     <div @click="seekNextWeek">下一周</div>
                 </div>
-                <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!timetable"></div>
+                <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!loaded"
+                    :style="{ opacity: (!loaded && timetable) ? 0.3 : 1}"></div>
             </div>
 
 
