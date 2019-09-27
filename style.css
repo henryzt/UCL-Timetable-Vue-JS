@@ -244,12 +244,13 @@ body{
     border-radius: 5px;
     position: fixed;
     width: 300px;
-    margin-left: -150px; 
+    margin-left: -170px; 
     left: 50%;
     top: -20%;
     z-index: 100;
     transition: 1s;
     box-shadow: none;
+    word-break: normal;
   }
 
   .info:hover{
