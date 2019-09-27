@@ -19,7 +19,7 @@
     props: ['session', 'date'],
     template: `
       <div class="post"  @click="openSidePanel(session,date)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
-      <div style="width:20%;text-align:center; color:#f48641">
+      <div style="width:20%;text-align:center; font-size: 17px; padding-top: 5px; color:#f48641">
         <div>{{session.start_time}}</div>
         <div>{{session.end_time}}</div>
       </div>
