@@ -54,7 +54,9 @@
       loaded: false,
       current: null,
       currentDate: null,
-      LANG: ENGLISH
+      LANG: ENGLISH,
+      spcoverStyle: null,
+      isSidePanelOpen: false
     },
     methods: {
       seekNextWeek: function(){
@@ -75,26 +77,37 @@
   })
 
 
-  var sidePanelOpen;
 
   function openSidePanel(session,date) {
     app.current = session
     app.currentDate = date
-    sidePanelOpen = true;
+    toggleBackCover(true)
     document.getElementById("sidepannel").style.top = "20%";
-    document.getElementById("spcover").style.opacity=0.5;
-    document.getElementById("spcover").style.visibility="visible";
     document.getElementById("closebtn").style.top = "22%";
+    app.isSidePanelOpen = true
   }
   
   function closeSidePanel() {
-      sidePanelOpen = false;
+      toggleBackCover(false)
       document.getElementById("sidepannel").style.top = "100%";
-      document.getElementById("spcover").style.opacity=0;
-      document.getElementById("spcover").style.visibility="hidden";
       document.getElementById("closebtn").style.top = "-5%";
+      app.isSidePanelOpen = false
+  }
+
+  function toggleBackCover(isVisible){
+    app.spcoverStyle = isVisible ? {opacity:0.5, visibility:"visible"} : {opacity:0, visibility:"hidden"};
+  }
+
+  function openNotice(text) {
+    app.notice = text
+    toggleBackCover(true)
+    document.getElementById("info").style.top = "20%";
   }
   
+  function hideNotice() {
+      toggleBackCover(false)
+      document.getElementById("info").style.top = "-20%";
+  }
   
   function getMondayOfDate(dateString){
     return moment(dateString).startOf('week').add(1,'day').format(dateFormat);

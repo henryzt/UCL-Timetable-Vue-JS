@@ -25,7 +25,11 @@
 </head>
 <body>
     <div id="app">
-        <div class="sidepannel_cover" @click="closeSidePanel" id="spcover"></div>
+        <div class="sidepannel_cover" @click="isSidePanelOpen ? closeSidePanel() : null" id="spcover" :style="spcoverStyle"></div>
+
+        <div class="post info" id="info">{{notice}}</div>
+
+        <!-- course detail panel -->
         <div id="sidepannel" class="sidepannel">
             <a href="javascript:void(0)" id="closebtn" class="closebtn" @click="closeSidePanel">
                 <i class="material-icons">expand_more</i>
@@ -67,6 +71,7 @@
             </div>
         </div>
 
+        <!-- navigator header -->
         <div class="container" id="main">
 
             <div class="float">
