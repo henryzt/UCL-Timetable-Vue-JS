@@ -25,9 +25,14 @@
 </head>
 <body>
     <div id="app">
-        <div class="sidepannel_cover" @click="isSidePanelOpen ? closeSidePanel() : null" id="spcover" :style="spcoverStyle"></div>
+        <div class="sidepannel_cover" @click="isSidePanelOpen ? closeSidePanel() : hideNotice()" id="spcover" :style="spcoverStyle"></div>
 
-        <div class="post info" id="info">{{notice}}</div>
+        <div class="post info" id="info">
+            <div class="detail_info" style="margin: 0;">
+                <div class="detail_icon"><i class="material-icons md-24">info</i></div>
+                <div class="detail_text">{{notice}}</div>
+            </div>
+        </div>
 
         <!-- course detail panel -->
         <div id="sidepannel" class="sidepannel">

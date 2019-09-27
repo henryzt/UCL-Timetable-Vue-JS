@@ -56,7 +56,8 @@
       currentDate: null,
       LANG: ENGLISH,
       spcoverStyle: null,
-      isSidePanelOpen: false
+      isSidePanelOpen: false,
+      notice: null
     },
     methods: {
       seekNextWeek: function(){
@@ -98,7 +99,7 @@
     app.spcoverStyle = isVisible ? {opacity:0.5, visibility:"visible"} : {opacity:0, visibility:"hidden"};
   }
 
-  function openNotice(text) {
+  function showNotice(text) {
     app.notice = text
     toggleBackCover(true)
     document.getElementById("info").style.top = "20%";
@@ -149,6 +150,10 @@
       app.timetable = null
       app.loaded = false
 
+      hideNotice()
+
+      let timeout = setTimeout(()=>{showNotice("Just a moment while we are fetching your full timetable...")},3000)
+
       //find if there are a local stored version
       let cached = getFromLocalStorage(date);
       if (cached) {
@@ -169,8 +174,10 @@
 
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
+            clearTimeout(timeout)
+            hideNotice()
             if(xhttp.responseText == -1){
-              alert("Error getting timetable")
+              showNotice("Error getting your timetable, please check whether you have the correct permission.")
               return
             }
             

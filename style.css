@@ -251,3 +251,7 @@ body{
     transition: 1s;
     box-shadow: none;
   }
+
+  .info:hover{
+      box-shadow: none;
+  }
