@@ -1,6 +1,17 @@
   const dateFormat = 'YYYY-MM-DD';
   const todayDateConst = moment().format(dateFormat);
 
+  const CHINESE = { today: "今日",
+                    next: "下一周",
+                    prev: "上一周",
+                    info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。"
+                  }
+  const ENGLISH = { today: "Today",
+                    next: "Next",
+                    prev: "Prev",
+                    info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data."
+                  }
+
   Vue.component('session', {
     data: () => ({ count: 10 }),
     props: ['session', 'date'],
@@ -41,6 +52,7 @@
       loaded: false,
       current: null,
       currentDate: null,
+      LANG: ENGLISH
     },
     methods: {
       seekNextWeek: function(){
@@ -153,3 +165,10 @@
       xhttp.send();
   }
 requestTimetable(todayDateConst)
+
+
+//change language based on browser
+  console.log(navigator.language)
+  if(navigator.language.search('zh') != -1){
+    app.LANG = CHINESE
+  }

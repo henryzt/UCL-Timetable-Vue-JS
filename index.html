@@ -70,9 +70,9 @@
 
             <div class="float">
                 <div class="navigator">
-                    <div @click="seekPreviousWeek">上一周</div>
-                    <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? "今日" : date}}</div>
-                    <div @click="seekNextWeek">下一周</div>
+                    <div @click="seekPreviousWeek">{{LANG.prev}}</div>
+                    <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? LANG.today : date}}</div>
+                    <div @click="seekNextWeek">{{LANG.next}}</div>
                 </div>
                 <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!loaded"
                     :style="{ opacity: (!loaded && timetable) ? 0.3 : 1}"></div>
@@ -99,7 +99,11 @@
             </div>
 
 
-            <div class="post_loading_text">Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。</div>
+            <div class="post_loading_text">
+                <a style="text-decoration: none; color: inherit;" href="https://github.com/henryz00/UCL-Timetable-Vue-JS">
+                    {{LANG.info}}
+                </a>
+            </div>
 
 
         </div>
