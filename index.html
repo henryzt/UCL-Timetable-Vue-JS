@@ -61,7 +61,11 @@
                 </div>
                 <div class="detail_info">
                     <div class="detail_icon"><i class="material-icons md-24">email</i></div>
-                    <div class="detail_text">Lecturer Email - {{current.module.lecturer.email}}</div>
+                    <div class="detail_text">Lecturer Email - 
+                        <div style="user-select: all;display:inline-block;">
+                            {{current.module.lecturer.email}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,7 +79,7 @@
                     <div @click="seekNextWeek">{{LANG.next}}</div>
                 </div>
                 <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!loaded"
-                    :style="{ opacity: (!loaded && timetable) ? 0.3 : 1}"></div>
+                    :style="{ opacity: (!loaded && timetable) ? 0.3 : 1, width: '100%'}"></div>
             </div>
 
 

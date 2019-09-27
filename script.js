@@ -12,6 +12,8 @@
                     info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data."
                   }
 
+  // Vue.config.devtools = true
+
   Vue.component('session', {
     data: () => ({ count: 10 }),
     props: ['session', 'date'],
@@ -154,6 +156,11 @@
 
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
+            if(xhttp.responseText == -1){
+              alert("Error getting timetable")
+              return
+            }
+            
             app.timetable = JSON.parse(xhttp.responseText);
             app.loaded = true;
             setToLocalStorage(date, xhttp.responseText)

@@ -51,6 +51,7 @@
 
 body{
     background: #f7f7f7;
+    user-select: none;
 }
 
 
@@ -144,6 +145,9 @@ body{
         margin-left: -280px; 
         left: 50%;
         padding: 30px;
+    }
+    .post{
+        border-radius: 5px;
     }
   }
 
