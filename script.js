@@ -3,9 +3,9 @@
 
   Vue.component('session', {
     data: () => ({ count: 10 }),
-    props: ['session'],
+    props: ['session', 'date'],
     template: `
-      <div class="post"  @click="openSidePanel(session)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
+      <div class="post"  @click="openSidePanel(session,date)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
       <div style="width:20%;text-align:center; color:#f48641">
         <div>{{session.start_time}}</div>
         <div>{{session.end_time}}</div>
@@ -39,7 +39,8 @@
       date: todayDateConst,
       todayDate: todayDateConst,
       loaded: false,
-      current: null
+      current: null,
+      currentDate: null,
     },
     methods: {
       seekNextWeek: function(){
@@ -62,13 +63,14 @@
 
   var sidePanelOpen;
 
-  function openSidePanel(session) {
+  function openSidePanel(session,date) {
     app.current = session
+    app.currentDate = date
     sidePanelOpen = true;
-    document.getElementById("sidepannel").style.top = "10%";
+    document.getElementById("sidepannel").style.top = "20%";
     document.getElementById("spcover").style.opacity=0.5;
     document.getElementById("spcover").style.visibility="visible";
-    document.getElementById("closebtn").style.top = "12%";
+    document.getElementById("closebtn").style.top = "22%";
   }
   
   function closeSidePanel() {

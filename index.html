@@ -33,7 +33,7 @@
             <div class="details" v-if="current">
                 <div style="padding-left: 12%;">
                     <div class="detail_title">{{current.session_title}}</div>
-                    <div style="padding: 10px 0; opacity: 0.6;">{{todayDate}} · {{current.start_time}} - {{current.end_time}}</div>
+                    <div style="padding: 10px 0; opacity: 0.6;">{{currentDate}} · {{current.start_time}} - {{current.end_time}}</div>
                 </div>
 
                 <div class="detail_info">
@@ -94,7 +94,7 @@
                 </div>
                 <!-- sessions -->
                 <div v-for="session in item.sessions">
-                    <session :session="session"></session>
+                    <session :session="session" :date="item.date"></session>
                 </div>
             </div>
 
