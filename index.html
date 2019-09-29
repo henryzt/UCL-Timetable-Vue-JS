@@ -109,13 +109,19 @@
                 </div>
             </div>
 
-
-            <div class="post_loading_text">
+            <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable">
+                Synced with UCL 
+                {{moment(timetable[0].syncTime).fromNow()}}<br>
+                <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">Resync Now</div>
+            </div>
+            
+            <div class="post_loading_text" style="margin-top:10px;">
                 <a style="text-decoration: none; color: inherit;" href="https://github.com/henryz00/UCL-Timetable-Vue-JS">
                     {{LANG.info}}
                 </a>
             </div>
-
+            
+            
 
         </div>
     </div>

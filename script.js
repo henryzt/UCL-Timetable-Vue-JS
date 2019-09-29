@@ -4,18 +4,19 @@
   const CHINESE = { today: "今日",
                     next: "下一周",
                     prev: "上一周",
-                    info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。"
+                    info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。",
+                    loading: "我们正在努力获取您最新的完整课表，请稍等..."
                   }
   const ENGLISH = { today: "Today",
                     next: "Next",
                     prev: "Prev",
-                    info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data."
+                    info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data.",
+                    loading: "Just a moment while we are fetching your full timetable..."
                   }
 
   // Vue.config.devtools = true
 
   Vue.component('session', {
-    data: () => ({ count: 10 }),
     props: ['session', 'date'],
     template: `
       <div class="post"  @click="openSidePanel(session,date)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
@@ -146,17 +147,17 @@
   let ifanrId = findGetParameter("id")
   let xhttp = null;
 
-  function requestTimetable(date){
+  function requestTimetable(date, doResync){
       app.timetable = null
       app.loaded = false
 
       hideNotice()
 
-      let timeout = setTimeout(()=>{showNotice("Just a moment while we are fetching your full timetable...")},3000)
+      let timeout = setTimeout(()=>{showNotice(app.LANG.loading)},3000)
 
       //find if there are a local stored version
       let cached = getFromLocalStorage(date);
-      if (cached) {
+      if (cached && !doResync) {
         app.timetable = cached;
       }
 
@@ -181,6 +182,7 @@
               return
             }
             
+            console.log("load")
             app.timetable = JSON.parse(xhttp.responseText);
             app.loaded = true;
             setToLocalStorage(date, xhttp.responseText)
@@ -188,7 +190,10 @@
 
           }
       };
-      xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=${ifanrId}&date=${date}`, true);
+
+      doResync = doResync ? "true" : "false"
+
+      xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=${ifanrId}&date=${date}&resync=${doResync}`, true);
       xhttp.send();
   }
 requestTimetable(todayDateConst)
