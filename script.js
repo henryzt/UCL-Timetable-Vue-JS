@@ -5,13 +5,15 @@
                     next: "下一周",
                     prev: "上一周",
                     info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。",
-                    loading: "我们正在努力获取您最新的完整课表，请稍等..."
+                    loading: "我们正在努力获取您最新的完整课表，请稍等...",
+                    resync: "立即重新同步"
                   }
   const ENGLISH = { today: "Today",
                     next: "Next",
                     prev: "Prev",
                     info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data.",
-                    loading: "Just a moment while we are fetching your full timetable..."
+                    loading: "Just a moment while we are fetching your full timetable...",
+                    resync: "Resync Now"
                   }
 
   // Vue.config.devtools = true

@@ -102,6 +102,7 @@ body{
     color: grey;
     background: white;
     box-shadow: -1px 2px 6px -1px #e2e2e2;
+    z-index: 50;
     
     animation-name: enter;
     animation-duration: 1s;

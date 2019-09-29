@@ -109,10 +109,10 @@
                 </div>
             </div>
 
-            <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable">
+            <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable && timetable[0].syncTime">
                 Synced with UCL 
                 {{moment(timetable[0].syncTime).fromNow()}}<br>
-                <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">Resync Now</div>
+                <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">{{LANG.resync}}</div>
             </div>
             
             <div class="post_loading_text" style="margin-top:10px;">
