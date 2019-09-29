@@ -15,7 +15,9 @@
                     loading: "Just a moment while we are fetching your full timetable...",
                     resync: "Resync Now"
                   }
-
+  
+  
+  let ifanrId = findGetParameter("id")
   // Vue.config.devtools = true
 
   Vue.component('session', {
@@ -89,6 +91,13 @@
     document.getElementById("sidepannel").style.top = "20%";
     document.getElementById("closebtn").style.top = "22%";
     app.isSidePanelOpen = true
+
+    //ga report
+    gtag('event', 'timetable-detail-opened', {
+      'event_category': 'timetable',
+      'event_label': date,
+      'value': `id=${ifanrId}&date=${date}&session=${session.session_title}`
+    });
   }
   
   function closeSidePanel() {
@@ -106,6 +115,12 @@
     app.notice = text
     toggleBackCover(true)
     document.getElementById("info").style.top = "20%";
+    //ga report
+    gtag('event', 'timetable-notice', {
+      'event_category': 'timetable',
+      'event_label': "loading-notice-showed",
+      'value': `id=${ifanrId}&date=${date}`
+    });
   }
   
   function hideNotice() {
@@ -145,8 +160,8 @@
           });
       return result;
   }
+  
 
-  let ifanrId = findGetParameter("id")
   let xhttp = null;
 
   function requestTimetable(date, doResync){
