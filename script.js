@@ -186,7 +186,7 @@
           gtag('event', 'request-timetable', {
             'event_category': 'timetable',
             'event_label': date,
-            'value': `id=${ifanrId}&date=${date}`
+            'value': `id=${ifanrId}&date=${date}&resync=${doResync}`
           });
 
 
