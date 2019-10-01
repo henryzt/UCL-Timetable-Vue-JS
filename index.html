@@ -99,7 +99,7 @@
             <!-- list rendering for each date -->
             <div v-for="item in timetable">
                 <!-- date indicator -->
-                <div id="{{item.today? 'today' : '0'}}">
+                <div :id="item.today? 'today' : '0'">
                     <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v-if="item.today">Today</div>
                     </div>
                 </div>

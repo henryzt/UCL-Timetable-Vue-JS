@@ -145,6 +145,18 @@
   }
 
 
+  function scrollTo(id, dontCheckIfScrolled) {
+    console.log("scorll")
+    if(!dontCheckIfScrolled && (document.documentElement.scrollTop || document.body.scrollTop) != 0){
+      return
+    }
+    var elmnt = document.getElementById(id);
+    if(elmnt){
+        elmnt.scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
+  }
 
 
   //ref https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
@@ -176,6 +188,7 @@
       let cached = getFromLocalStorage(date);
       if (cached && !doResync) {
         app.timetable = cached;
+        scrollTo('today',true)
       }
 
       if(xhttp) xhttp.abort();
@@ -204,6 +217,8 @@
             app.loaded = true;
             setToLocalStorage(date, xhttp.responseText)
             console.log(app.timetable)
+
+            scrollTo('today')
 
           }
       };
