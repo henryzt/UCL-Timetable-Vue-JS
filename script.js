@@ -93,10 +93,10 @@
     app.isSidePanelOpen = true
 
     //ga report
-    gtag('event', 'timetable-detail-opened', {
-      'event_category': 'timetable',
-      'event_label': date,
-      'value': `id=${ifanrId}&date=${date}&session=${session.session_title}`
+    gtag('event', date, {
+      'event_category': 'timetable-detail-opened',
+      'event_label': `id=${ifanrId}&date=${date}&session=${session.session_title}`,
+      'value': 0
     });
   }
   
@@ -116,10 +116,10 @@
     toggleBackCover(true)
     document.getElementById("info").style.top = "20%";
     //ga report
-    gtag('event', 'timetable-notice', {
-      'event_category': 'timetable',
-      'event_label': "loading-notice-showed",
-      'value': `id=${ifanrId}&date=${date}`
+    gtag('event', 'loading-notice-showed', {
+      'event_category': 'timetable-notice',
+      'event_label': `id=${ifanrId}&date=${date}`,
+      'value': 0
     });
   }
   
@@ -150,7 +150,7 @@
     if(!dontCheckIfScrolled && (document.documentElement.scrollTop || document.body.scrollTop) != 0){
       return
     }
-    var elmnt = document.getElementById(id);
+    let elmnt = document.getElementById(id);
     if(elmnt){
         elmnt.scrollIntoView({ 
             behavior: 'smooth' 
@@ -196,10 +196,10 @@
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           //ga report
-          gtag('event', 'request-timetable', {
-            'event_category': 'timetable',
-            'event_label': date,
-            'value': `id=${ifanrId}&date=${date}&resync=${doResync}`
+          gtag('event', date, {
+            'event_category': 'request-timetable',
+            'event_label': `id=${ifanrId}&date=${date}&resync=${doResync}`,
+            'value': 0
           });
 
 
