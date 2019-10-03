@@ -56,7 +56,7 @@
                 </div>
                 <div class="detail_info">
                     <div class="detail_icon"><i class="material-icons md-24">room</i></div>
-                    <div class="detail_text">{{current.location.name}} - {{current.location.site_name}}</div>
+                    <div class="detail_text" style="text-decoration: underline;" @click="goToMap(current.location)" >{{current.location.name}} - {{current.location.site_name}}</div>
                 </div>
                 <div class="detail_info">
                     <div class="detail_icon"><i class="material-icons md-24">assignment_ind</i></div>
@@ -127,6 +127,7 @@
     </div>
     <script src="moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -159,6 +159,13 @@
   }
 
 
+  function goToMap(locationObj){
+    console.log(locationObj)
+    wx.miniProgram.navigateTo({url: '/pages/ucl/map/map'})
+    wx.miniProgram.postMessage({ location: locationObj })
+  }
+
+
   //ref https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
   function findGetParameter(parameterName) {
       var result = null,
