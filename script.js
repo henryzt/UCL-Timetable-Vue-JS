@@ -163,8 +163,7 @@
     console.log(locationObj)
     wx.miniProgram.getEnv(function (res) {
       if (res.miniprogram) {
-        wx.miniProgram.navigateTo({url: '/pages/ucl/map/map'});
-        wx.miniProgram.postMessage({ location: locationObj })
+        wx.miniProgram.navigateTo({url: '/pages/ucl/map/map?tblocation='+JSON.stringify(locationObj)});
       }else{
         console.log("not in wechat")
       }
