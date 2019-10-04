@@ -57,7 +57,9 @@
                 </div>
                 <div class="detail_info">
                     <div class="detail_icon"><i class="material-icons md-24">room</i></div>
-                    <div class="detail_text" style="text-decoration: underline;" @click="goToMap(current.location)" >{{current.location.name}} - {{current.location.site_name}}</div>
+                    <div class="detail_text" style="text-decoration: underline;" @click="goToMap(current.location)" >{{current.location.name}} - {{current.location.site_name}}
+                        <div class="additional-info" style="margin-left:10px">{{LANG.openMap}}</div>
+                    </div>
                 </div>
                 <div class="detail_info">
                     <div class="detail_icon"><i class="material-icons md-24">assignment_ind</i></div>

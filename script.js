@@ -6,14 +6,16 @@
                     prev: "上一周",
                     info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。",
                     loading: "我们正在努力获取您最新的完整课表，请稍等...",
-                    resync: "立即重新同步"
+                    resync: "立即重新同步",
+                    openMap: "打开地图"
                   }
   const ENGLISH = { today: "Today",
                     next: "Next",
                     prev: "Prev",
                     info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data.",
                     loading: "Just a moment while we are fetching your full timetable...",
-                    resync: "Resync Now"
+                    resync: "Resync Now",
+                    openMap: "Open in Map"
                   }
   
   
@@ -23,7 +25,7 @@
   Vue.component('session', {
     props: ['session', 'date'],
     template: `
-      <div class="post"  @click="openSidePanel(session,date)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
+      <div class="post" @doubleClick="goToMap(session.location)"  @click="openSidePanel(session,date)" style="display:flex; flex-direction: horizontal;vertical-align:middle;">
       <div style="width:20%;text-align:center; font-size: 17px; padding-top: 5px; color:#f48641">
         <div>{{session.start_time}}</div>
         <div>{{session.end_time}}</div>
@@ -118,7 +120,7 @@
     //ga report
     gtag('event', 'loading-notice-showed', {
       'event_category': 'timetable-notice',
-      'event_label': `id=${ifanrId}&date=${date}`,
+      'event_label': `id=${ifanrId}`,
       'value': 0
     });
   }
@@ -167,6 +169,11 @@
       }else{
         console.log("not in wechat")
       }
+    });
+    gtag('event', 'location-opened', {
+      'event_category': 'location-opened',
+      'event_label': `id=${ifanrId}`,
+      'value': 0
     });
   }
 
