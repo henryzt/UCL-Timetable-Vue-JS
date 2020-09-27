@@ -9,7 +9,8 @@
                     resync: "立即重新同步",
                     openMap: "打开地图",
                     loginPrompt: "您还没有登录，请前往「我的UCL」页面登录并绑定UCL账号后即可随时查看您的实时课表！",
-                    login:"立即登录",
+                    login: "立即登录",
+                    timezone: "切换时区"
                   }
   const ENGLISH = { today: "Today",
                     next: "Next",
@@ -19,7 +20,8 @@
                     resync: "Resync Now",
                     openMap: "Open in Map",
                     loginPrompt: "Please login to view your personal timetable. To login, please go to 'My UCL' section of the app.",
-                    login:"Login",
+                    login: "Login",
+                    timezone: "Switch Timezone"
                   }
   
   
@@ -73,7 +75,8 @@
       spcoverStyle: null,
       isSidePanelOpen: false,
       notice: null,
-      ifanrId: ifanrId
+      ifanrId: ifanrId,
+      chinaTimezone: false
     },
     mounted(){
       //change language based on browser
@@ -81,7 +84,10 @@
       if(navigator.language.search('zh') != -1){
         this.LANG = CHINESE
       }
-      this.LANG = CHINESE
+      //guess user timezone
+      if(moment.tz.guess().includes("Asia")){
+        this.chinaTimezone = true
+      }
     },
     methods: {
       seekNextWeek(){
@@ -212,6 +218,26 @@
           });
       return result;
   }
+
+
+  function convertTimezone(timetable){
+    if(!app.chinaTimezone) return timetable;
+
+    const format = (date, time)=>{
+      const tz = moment.tz(date + " " + time, "Europe/London")
+      return tz.tz("Asia/Shanghai").format("HH:mm")
+    }
+
+    for(let day of timetable){
+      const date = day.date.slice(-10);
+      for(let session of day.sessions){
+        session.start_time = format(date, session.start_time)
+        session.end_time = format(date, session.end_time)
+      }
+    }
+    
+    return timetable;
+  }
   
 
   let xhttp = null;
@@ -253,9 +279,11 @@
             }
             
             console.log("load")
-            app.timetable = JSON.parse(xhttp.responseText);
+            const res = JSON.parse(xhttp.responseText);
+            
+            app.timetable = convertTimezone(res);
             app.loaded = true;
-            setToLocalStorage(date, xhttp.responseText)
+            setToLocalStorage(date, JSON.stringify(res))
             console.log(app.timetable)
 
             scrollTo('today')

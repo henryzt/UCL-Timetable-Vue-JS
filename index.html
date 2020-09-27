@@ -68,16 +68,24 @@
                     </div>
                 </div>
 
-                <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable && timetable[0].syncTime">
+                <div class="post_loading_text bottom_info" v-if="timetable && timetable[0].syncTime">
                     Synced with UCL 
-                    {{moment(timetable[0].syncTime).fromNow()}}<br>
+                    {{moment(timetable[0].syncTime).fromNow()}}
                     <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">{{LANG.resync}}</div>
                 </div>
+
+                <div class="post_loading_text bottom_info" v-if="timetable" style="padding:0">
+                    <span v-if="chinaTimezone">目前时间显示为中国时区</span>
+                    <span v-else>Time displayed using current UK timezone</span>
+                    <div class="additional-info" style="margin:5px;" @click="chinaTimezone=!chinaTimezone;requestTimetable(date,true);">{{LANG.timezone}}</div>
+                </div>
+
                 
                 <div class="post_loading_text" style="margin-top:10px;">
-                    <a style="text-decoration: none; color: inherit;" href="https://github.com/henryz00/UCL-Timetable-Vue-JS">
+                    <a style="text-decoration: none; color: inherit;">
                         {{LANG.info}}
                     </a>
+                    <!-- https://github.com/henryz00/UCL-Timetable-Vue-JS -->
                 </div>
 
 
@@ -140,7 +148,8 @@
         </div>
 
     </div>
-    <script src="moment.js"></script>
+    <script src="assets/moment.js"></script>
+    <script src="assets/moment-timezone.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="script.js"></script>

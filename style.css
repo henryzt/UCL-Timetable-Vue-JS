@@ -278,3 +278,7 @@ body {
     padding: 10px;
     margin: 20px;
 }
+
+.bottom_info{
+    padding-bottom:0;color:grey !important;
+}
