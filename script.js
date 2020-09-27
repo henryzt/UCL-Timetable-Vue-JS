@@ -52,7 +52,7 @@
       </div>  `
   })
 
-  var app = new Vue({
+  const app = new Vue({
     el: '#app',
     data: {
       timetable: null,
@@ -180,7 +180,7 @@
 
   //ref https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
   function findGetParameter(parameterName) {
-      var result = null,
+      let result = null,
           tmp = [];
       location.search
           .substr(1)
