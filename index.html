@@ -26,110 +26,118 @@
 </head>
 <body>
     <div id="app">
-        <div class="sidepannel_cover" @click="isSidePanelOpen ? closeSidePanel() : hideNotice()" id="spcover" :style="spcoverStyle"></div>
-
-        <!-- notice -->
-        <div class="post info" id="info">
-            <div class="detail_info" style="margin: 0;">
-                <div class="detail_icon"><i class="material-icons md-24">info</i></div>
-                <div class="detail_text">{{notice}}</div>
-            </div>
-        </div>
-
-        <div class="container" id="main">
-            
-            <!-- navigator header -->
-            <div class="float">
-                <div class="navigator">
-                    <div @click="seekPreviousWeek">{{LANG.prev}}</div>
-                    <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? LANG.today : date}}</div>
-                    <div @click="seekNextWeek">{{LANG.next}}</div>
-                </div>
-                <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!loaded"
-                    :style="{ opacity: (!loaded && timetable) ? 0.3 : 1, width: '100%'}"></div>
-            </div>
-
-
-            <!-- loading indicator dummy -->
-            <div v-for="n in 5" v-if="!timetable">
-                <div class="post post-dummy loading-animation">
-                </div>
-            </div>
-
-            <!-- list rendering for each date -->
-            <div v-for="item in timetable">
-                <!-- date indicator -->
-                <div :id="item.today? 'today' : '0'">
-                    <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v-if="item.today">Today</div>
-                    </div>
-                </div>
-                <!-- sessions -->
-                <div v-for="session in item.sessions">
-                    <session :session="session" :date="item.date"></session>
-                </div>
-            </div>
-
-            <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable && timetable[0].syncTime">
-                Synced with UCL 
-                {{moment(timetable[0].syncTime).fromNow()}}<br>
-                <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">{{LANG.resync}}</div>
-            </div>
-            
-            <div class="post_loading_text" style="margin-top:10px;">
-                <a style="text-decoration: none; color: inherit;" href="https://github.com/henryz00/UCL-Timetable-Vue-JS">
-                    {{LANG.info}}
-                </a>
-            </div>
-
-
-        </div>
-
-
-
-        <!-- course detail panel -->
-        <div id="sidepannel" class="sidepannel">
-            <a href="javascript:void(0)" id="closebtn" class="closebtn" @click="closeSidePanel">
-                <i class="material-icons">expand_more</i>
-            </a>
-
-            <div class="details" v-if="current">
-                <div style="padding-left: 12%;">
-                    <div class="detail_title">{{current.session_title}}</div>
-                    <div style="padding: 10px 0; opacity: 0.6;">{{currentDate}} · {{current.start_time}} - {{current.end_time}}</div>
-                </div>
-
-                <div class="detail_info">
-                    <div class="detail_icon"><i class="material-icons md-24">subject</i></div>
-                    <div class="detail_text">{{current.module.module_id}} - {{current.module.name}}</div>
-                </div>
-                <div class="detail_info">
+        <div v-if="ifanrId">
+            <!-- notice -->
+            <div class="post info" id="info">
+                <div class="detail_info" style="margin: 0;">
                     <div class="detail_icon"><i class="material-icons md-24">info</i></div>
-                    <div class="detail_text">{{current.session_type_str}}</div>
-                </div>
-                <div class="detail_info">
-                    <div class="detail_icon"><i class="material-icons md-24">room</i></div>
-                    <div class="detail_text" style="text-decoration: underline;" @click="goToMap(current.location)" >{{current.location.name}} - {{current.location.site_name}}
-                        <div class="additional-info" style="margin-left:10px">{{LANG.openMap}}</div>
-                    </div>
-                </div>
-                <div class="detail_info">
-                    <div class="detail_icon"><i class="material-icons md-24">assignment_ind</i></div>
-                    <div class="detail_text">{{current.contact}}</div>
-                </div>
-
-                <hr style="opacity: 0.3; margin: 30px 0;">
-
-                <div class="detail_info">
-                    <div class="detail_icon"><i class="material-icons md-24">people</i></div>
-                    <div class="detail_text">Room capacity - {{current.location.capacity}}</div>
-                </div>
-                <div class="detail_info">
-                    <div class="detail_icon"><i class="material-icons md-24">email</i></div>
-                    <div class="detail_text">Lecturer Email - {{current.module.lecturer.email}}</div>
+                    <div class="detail_text">{{notice}}</div>
                 </div>
             </div>
+
+            <div class="container" id="main">
+                
+                <!-- navigator header -->
+                <div class="float">
+                    <div class="navigator">
+                        <div @click="seekPreviousWeek">{{LANG.prev}}</div>
+                        <div @click="returnToday" style="color:black;font-size:15px;">{{date == todayDate? LANG.today : date}}</div>
+                        <div @click="seekNextWeek">{{LANG.next}}</div>
+                    </div>
+                    <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" v-show="!loaded"
+                        :style="{ opacity: (!loaded && timetable) ? 0.3 : 1, width: '100%'}"></div>
+                </div>
+
+
+                <!-- loading indicator dummy -->
+                <div v-for="n in 5" v-if="!timetable">
+                    <div class="post post-dummy loading-animation">
+                    </div>
+                </div>
+
+                <!-- list rendering for each date -->
+                <div v-for="item in timetable">
+                    <!-- date indicator -->
+                    <div :id="item.today? 'today' : '0'">
+                        <div class="post_title date">{{item.date}}  <div class="additional-info" style="background:#f48641;color:white;margin-left:5px" v-if="item.today">Today</div>
+                        </div>
+                    </div>
+                    <!-- sessions -->
+                    <div v-for="session in item.sessions">
+                        <session :session="session" :date="item.date"></session>
+                    </div>
+                </div>
+
+                <div class="post_loading_text" style="padding-bottom:0;color:grey !important;" v-if="timetable && timetable[0].syncTime">
+                    Synced with UCL 
+                    {{moment(timetable[0].syncTime).fromNow()}}<br>
+                    <div class="additional-info" style="margin:5px;" @click="requestTimetable(date,true);">{{LANG.resync}}</div>
+                </div>
+                
+                <div class="post_loading_text" style="margin-top:10px;">
+                    <a style="text-decoration: none; color: inherit;" href="https://github.com/henryz00/UCL-Timetable-Vue-JS">
+                        {{LANG.info}}
+                    </a>
+                </div>
+
+
+            </div>
+
+
+            <div class="sidepannel_cover" @click="isSidePanelOpen ? closeSidePanel() : hideNotice()" id="spcover" :style="spcoverStyle"></div>
+
+            <!-- course detail panel -->
+            <div id="sidepannel" class="sidepannel">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" @click="closeSidePanel">
+                    <i class="material-icons">expand_more</i>
+                </a>
+
+                <div class="details" v-if="current">
+                    <div style="padding-left: 12%;">
+                        <div class="detail_title">{{current.session_title}}</div>
+                        <div style="padding: 10px 0; opacity: 0.6;">{{currentDate}} · {{current.start_time}} - {{current.end_time}}</div>
+                    </div>
+
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">subject</i></div>
+                        <div class="detail_text">{{current.module.module_id}} - {{current.module.name}}</div>
+                    </div>
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">info</i></div>
+                        <div class="detail_text">{{current.session_type_str}}</div>
+                    </div>
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">room</i></div>
+                        <div class="detail_text" style="text-decoration: underline;" @click="goToMap(current.location)" >{{current.location.name}} - {{current.location.site_name}}
+                            <div class="additional-info" style="margin-left:10px">{{LANG.openMap}}</div>
+                        </div>
+                    </div>
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">assignment_ind</i></div>
+                        <div class="detail_text">{{current.contact ? current.contact : "Unkown"}}</div>
+                    </div>
+
+                    <hr style="opacity: 0.3; margin: 30px 0;">
+
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">people</i></div>
+                        <div class="detail_text">Room capacity - {{current.location.capacity ? current.location.capacity : "Unkown"}}</div>
+                    </div>
+                    <div class="detail_info">
+                        <div class="detail_icon"><i class="material-icons md-24">email</i></div>
+                        <div class="detail_text">Lecturer Email - {{current.module.lecturer.email}}</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        <!-- Login prompt -->
+        <div class="loginPrompt" v-else>
+            <i class="login_icon material-icons md-24">login</i>
+            {{LANG.loginPrompt}}
+            <div class="loginButton" @click="goToLogin">{{LANG.login}}</div>
+        </div>
 
     </div>
     <script src="moment.js"></script>

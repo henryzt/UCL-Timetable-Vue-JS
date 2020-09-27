@@ -7,7 +7,9 @@
                     info: "Timetable 信息由 UCL API 提供。数据仅供参考，为以防万一，重要课程请查阅UCL官网。",
                     loading: "我们正在努力获取您最新的完整课表，请稍等...",
                     resync: "立即重新同步",
-                    openMap: "打开地图"
+                    openMap: "打开地图",
+                    loginPrompt: "您还没有登录，请前往「我的UCL」页面登录并绑定UCL账号后即可随时查看您的实时课表！",
+                    login:"立即登录",
                   }
   const ENGLISH = { today: "Today",
                     next: "Next",
@@ -15,7 +17,9 @@
                     info: "Timetable data is provided by UCL API, for reference only. For important courses, please visit timetable.ucl.ac.uk for a more accurate data.",
                     loading: "Just a moment while we are fetching your full timetable...",
                     resync: "Resync Now",
-                    openMap: "Open in Map"
+                    openMap: "Open in Map",
+                    loginPrompt: "Please login to view your personal timetable. To login, please go to 'My UCL' section of the app.",
+                    login:"Login",
                   }
   
   
@@ -37,7 +41,11 @@
 
         </div> 
 
-        <div class="post_title">
+        <div class="post_title" v-if="session.module.module_id">
+            {{session.module.module_id}}
+        </div>
+
+        <div class="post_title" v-if="session.location.name">
             {{session.location.name}} - {{session.location.site_name}}
         </div>
         <div class="post_title">
@@ -64,22 +72,35 @@
       LANG: ENGLISH,
       spcoverStyle: null,
       isSidePanelOpen: false,
-      notice: null
+      notice: null,
+      ifanrId: ifanrId
+    },
+    mounted(){
+      //change language based on browser
+      console.log(navigator.language)
+      if(navigator.language.search('zh') != -1){
+        this.LANG = CHINESE
+      }
+      this.LANG = CHINESE
     },
     methods: {
-      seekNextWeek: function(){
+      seekNextWeek(){
         this.date = moment(this.date).add(7, 'days').format(dateFormat)
         requestTimetable(this.date)
       },
   
-      seekPreviousWeek: function(){
+      seekPreviousWeek(){
         this.date = moment(this.date).subtract(7, 'days').format(dateFormat)
         requestTimetable(this.date)
       },
   
-      returnToday: function () {
+      returnToday() {
         this.date = this.todayDate
         requestTimetable(this.date)
+      },
+
+      goToLogin(){
+        wx.miniProgram.switchTab({url: '/pages/me/me'});
       }
     }
   })
@@ -167,7 +188,7 @@
       if (res.miniprogram) {
         wx.miniProgram.navigateTo({url: '/pages/ucl/map/map?tblocation='+JSON.stringify(locationObj)});
       }else{
-        console.log("not in wechat")
+        alert("Failed, app not running inside wechat")
       }
     });
     gtag('event', 'location-opened', {
@@ -247,11 +268,6 @@
       xhttp.open("GET", `https://uclcssa.cn/post/get-timetable.php?id=${ifanrId}&date=${date}&resync=${doResync}`, true);
       xhttp.send();
   }
+
+
 requestTimetable(todayDateConst)
-
-
-//change language based on browser
-  console.log(navigator.language)
-  if(navigator.language.search('zh') != -1){
-    app.LANG = CHINESE
-  }
