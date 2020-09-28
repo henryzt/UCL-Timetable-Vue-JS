@@ -12,6 +12,7 @@ const CHINESE = {
   loginPrompt: "您还没有登录，请前往「我的UCL」页面登录并绑定UCL账号后即可随时查看您的实时课表！",
   login: "立即登录",
   timezone: "切换时区",
+  error: "获取课表失败，请前往「我的UCL」确认您已经绑定了UCL账号",
 };
 const ENGLISH = {
   today: "Today",
@@ -26,6 +27,8 @@ const ENGLISH = {
     "Please login to view your personal timetable. To login, please go to 'My UCL' section of the app.",
   login: "Login",
   timezone: "Switch Timezone",
+  error:
+    "Error getting your timetable, please check whether you have logged in with UCL and have the correct permission.",
 };
 
 let ifanrId = findGetParameter("id");
@@ -278,9 +281,7 @@ function requestTimetable(date, doResync) {
       clearTimeout(timeout);
       hideNotice();
       if (xhttp.responseText == -1) {
-        showNotice(
-          "Error getting your timetable, please check whether you have the correct permission."
-        );
+        showNotice(app.LANG.error);
         return;
       }
 
